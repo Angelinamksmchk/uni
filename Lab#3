@@ -1,0 +1,52 @@
+using System;
+
+namespace Lab3
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            /*
+             * 
+             * //Создание объекта для генерации чисел
+            Random rnd = new Random();
+ 
+            //Получить очередное (в данном случае - первое) случайное число
+            int value = rnd.Next();
+ 
+            //Вывод полученного числа в консоль
+            Console.WriteLine(value);
+            */
+
+
+
+                                        
+            Random rnd = new Random();                                          //Создание объекта для генерации чисел
+
+
+            Console.WriteLine("Введіть 1 число: ");
+            int a = rnd.Next(0, 20);                                            //Получить случайное число (в диапазоне от 0 до 10)
+            Console.WriteLine(a);                                               //Вывод числа в консоль
+
+
+            Console.WriteLine("Введіть 2 число: ");
+            int b = rnd.Next(0, 20);
+            Console.WriteLine(b);
+
+            Console.WriteLine("Введіть 3 число: ");
+            int c = rnd.Next(0, 20);
+            Console.WriteLine(c);
+
+            if ( a == b || a == c || b == c)
+            {
+                Console.WriteLine("Серед трьох даних цілих чисел є хоч би одна пара співпадаючих!");
+            }
+            else
+            {
+                Console.WriteLine("Серед трьох даних цілих чисел немає жодної співпадаючої пари!");
+            }
+
+        }
+    }
+}
+
