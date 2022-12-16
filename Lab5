@@ -1,0 +1,114 @@
+using System;
+
+namespace lab5
+{
+    class Program
+    {
+        static double[,] Input()
+        {
+            Random rnd = new Random();
+
+            Console.Write("Введіть розмір масиву:\nn=");
+            int n = int.Parse(Console.ReadLine());
+            Console.Write("m=");
+            int m = int.Parse(Console.ReadLine());
+            double[,] a = new double[n, m];
+            Console.WriteLine("Введіть елементи масиву:");
+            for (int i = 0; i < a.GetLength(0); i++)
+                for (int j = 0; j < a.GetLength(1); j++)
+                {
+                    Console.Write("a[{0},{1}]=", i, j);
+                    a[i, j] = rnd.Next(0, 50); ;
+                }
+            return a;
+        }
+
+
+
+        static void Print(double[,] a)
+        {
+            for (int i = 0; i < a.GetLength(0); i++, Console.WriteLine())
+                for (int j = 0; j < a.GetLength(1); j++)
+                    Console.Write("{0,3}", a[i, j]);
+        }
+
+
+
+
+        static void FindSum(double[,] arr, ref int sum)
+        {
+            for (int i = 0; i < arr.GetLength(0); i++)
+                if (arr[i, 0] < 0)
+                    sum++;
+        }
+
+
+
+        static void FindMin(double[,] arr, int sum, ref int indMin)
+        {
+            int temp = 0;
+            for (int j = 1; j < arr.GetLength(1); j++)
+            {
+                for (int i = 0; i < arr.GetLength(0); i++)
+                    if (arr[i, j] > 0)
+                        temp++;
+                if (temp < sum && temp != 0)
+                {
+                    sum = temp;
+                    indMin = j;
+                }
+                temp = 0;
+            }
+        }
+
+
+
+        static void FindMax(double[,] arr, int sum, ref int indMax)
+        {
+            int temp = 0;
+            for (int j = 1; j < arr.GetLength(1); j++)
+            {
+                for (int i = 0; i < arr.GetLength(0); i++)
+                    if (arr[i, j] > 0)
+                        temp++;
+                if (temp > sum)
+                {
+                    sum = temp;
+                    indMax = j;
+                }
+                temp = 0;
+            }
+        }
+
+
+
+        static void Change(double[,] arr, int min, int max)
+        {
+            double temp;
+            for (int i = 0; i < arr.GetLength(0); i++)
+            {
+                temp = arr[i, min];
+                arr[i, min] = arr[i, max];
+                arr[i, max] = temp;
+            }
+        }
+
+
+
+        static void Main(string[] args)
+        {
+            double[,] arr = Input();
+            Console.WriteLine("Початкова матриця:");
+            Print(arr);
+            int sum, indMin, indMax;
+            sum = indMin = indMax = 0;
+            FindSum(arr, ref sum);
+            FindMin(arr, sum, ref indMin);
+            FindMax(arr, sum, ref indMax);
+            Change(arr, indMin, indMax);
+            Console.WriteLine("Змінена матриця:");
+            Print(arr);
+            Console.ReadKey();
+        }
+    }
+}
